@@ -14,6 +14,8 @@ interface DataBaseQueryWorker
 
     public function __construct(DataBase $db);
 
+    public function getConnect();
+
     public function getQueryUnit();
 
     public function deleteFromQueue($id): bool;
@@ -49,8 +51,12 @@ class DataBaseQueryWorkerMysql implements DataBaseQueryWorker
     public function __construct(DataBase $db)
     {
         $this->db = $db->getConnect();
+
     }
 
+    public function getConnect(){
+        return $this->db;
+    }
     public function getQueryUnit()
     {
         $sql = "SELECT * FROM `queue` LIMIT 1";

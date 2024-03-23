@@ -1,5 +1,5 @@
 <?php
-require_once "src/Repositories/config.php";
+require_once "config/dbConfig.php";
 require_once "src/Repositories/DataBase.php";
 require_once "src/Repositories/DataBaseQuery.php";
 require_once "src/Heplers/CommandCollection.php";

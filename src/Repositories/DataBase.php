@@ -20,6 +20,7 @@ class DataBaseMysql implements DataBase
 
     public function getConnect(): Mysqli
     {
+   
         return $this->db;
     }
 }

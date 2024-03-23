@@ -19,6 +19,7 @@ class Spider implements WorkerInterface
     //TODO: reading from database path and mask for the worker
     public function run($dir = '', $mask = '')
     {
+
         $arr = $this->db->getQueryUnit();
         if ($arr === NULL) {
             return false;
@@ -39,6 +40,7 @@ class Spider implements WorkerInterface
                 }
             }
             $this->db->deleteFromQueue($arr["id"]);
+            return $arr;
         }
     }
 }
