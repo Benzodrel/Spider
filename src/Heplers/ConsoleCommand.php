@@ -87,7 +87,6 @@ class DaemonStart implements ConsoleCommand
             if (is_array($test)) {
                 file_put_contents('/srv/website/test/db.txt', implode("", $test) . PHP_EOL, FILE_APPEND);
             }
-//            $db->addToPidList($pid);
             posix_kill(getmypid(), SIGTERM);
         }
 
@@ -106,12 +105,14 @@ class DaemonStart implements ConsoleCommand
             posix_setsid();
             file_put_contents('/srv/website/test/pid.txt', getmypid() . PHP_EOL, FILE_APPEND);
             $pid = getmypid();
+            $this->db->getConnect();
             $this->db->addToPidList($pid);
+
             while (1) {
 
                 while (count($this->childProcesses) <= $this->max_processes) {
                     $this->worker($this->db, $this->workerHelper);
-                    sleep(1);
+//                    sleep(1);
                 }
                 while (count($this->childProcesses) > 0) {
                     foreach ($this->childProcesses as $key => $pid) {
